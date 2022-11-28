@@ -1,0 +1,96 @@
+{
+  "name": "layout-control",
+  "displayName": "layout-control",
+  "description": "Layout Control easy access for MacOS users",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JockeRider199/layout-control.git"
+  },
+  "author": {
+    "name": "JockeRider199"
+  },
+  "publisher": "JockeRider199",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.73.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:layout-control.activate-sidebar",
+    "onCommand:layout-control.desactivate-sidebar",
+    "onCommand:layout-control.activate-panel",
+    "onCommand:layout-control.desactivate-panel"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "layout-control.desactivate-sidebar",
+        "title": "Desactivate Sidebar",
+        "icon": "$(layout-sidebar-left)"
+      },
+      {
+        "command": "layout-control.activate-sidebar",
+        "title": "Activate Sidebar",
+        "icon": "$(layout-activitybar-left)"
+      },
+      {
+        "command": "layout-control.activate-panel",
+        "title": "Activate Panel",
+        "icon": "$(layout-statusbar)"
+      },
+      {
+        "command": "layout-control.desactivate-panel",
+        "title": "Deactivate Panel",
+        "icon": "$(layout-panel)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "layout-control.desactivate-sidebar",
+          "group": "navigation@30",
+          "when": "sideBarVisible"
+        },
+        {
+          "command": "layout-control.activate-sidebar",
+          "group": "navigation@30",
+          "when": "!sideBarVisible"
+        },
+        {
+          "command": "layout-control.desactivate-panel",
+          "group": "navigation@40",
+          "when": "panelVisible"
+        },
+        {
+          "command": "layout-control.activate-panel",
+          "group": "navigation@40",
+          "when": "!panelVisible"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.73.0",
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.26.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.1.0",
+    "typescript": "^4.8.4",
+    "@vscode/test-electron": "^2.2.0"
+  }
+}
